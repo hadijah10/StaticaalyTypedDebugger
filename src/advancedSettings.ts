@@ -4,7 +4,7 @@ import {ComponentObjectType, TComponentsDataType,WifiObject} from './generalType
 declare var Chart: any
 
 import General from "./general.js";
-import Light from './basicSettings.js';
+import Light from './basicSettings';
 
 class AdvanceSettings extends Light {
     constructor () {
