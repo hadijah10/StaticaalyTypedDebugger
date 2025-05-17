@@ -56,6 +56,7 @@ mainRoomsContainer?.addEventListener('change', (e) => {
 });
 // advance settings modal
 advanceFeaturesContainer?.addEventListener('click', (e) => {
+    console.log(e.target);
     const selectedElement = e.target;
     if (selectedElement.closest('.close-btn')) {
         advancedSettings.closeModalPopUp();

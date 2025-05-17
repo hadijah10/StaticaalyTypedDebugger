@@ -1,25 +1,75 @@
-// interface GeneralType{
-//     isLightOn:boolean,
-//     lightIntensity:number,
-//     componentsData:TComponentsDataType,
-//     getComponent(name:string):componentObjectType
-// }
 class General {
     constructor() {
         this.componentsData = {
-            hall: { name: 'hall', lightIntensity: 5, numOfLights: 6, isLightOn: false, autoOn: '06:30', autoOff: '22:00', usage: [22, 11, 12, 10, 12, 17, 22] },
-            bedroom: { name: 'bedroom', lightIntensity: 5, numOfLights: 3, isLightOn: false, autoOn: '06:30', autoOff: '22:00', usage: [18, 5, 7, 5, 6, 6, 18] },
-            bathroom: { name: 'bathroom', lightIntensity: 5, numOfLights: 1, isLightOn: false, autoOn: '06:30', autoOff: '22:00', usage: [2, 1, 1, 1, 1, 3, 3] },
-            ['outdoor lights']: { name: 'outdoor lights', lightIntensity: 5, numOfLights: 6, isLightOn: false, autoOn: '06:30', autoOff: '22:00', usage: [15, 12, 13, 9, 12, 13, 18] },
-            ['guest room']: { name: 'guest room', lightIntensity: 5, numOfLights: 4, isLightOn: false, autoOn: '06:30', autoOff: '22:00', usage: [12, 10, 3, 9, 5, 5, 18] },
-            kitchen: { name: 'kitchen', lightIntensity: 5, numOfLights: 3, isLightOn: false, autoOn: '06:30', autoOff: '22:00', usage: [12, 19, 13, 11, 12, 13, 18] },
-            ['walkway & corridor']: { name: 'walkway & corridor', lightIntensity: 5, numOfLights: 8, isLightOn: false, autoOn: '06:30', autoOff: '22:00', usage: [12, 19, 13, 15, 22, 23, 18] },
+            hall: {
+                name: "hall",
+                lightIntensity: 5,
+                numOfLights: 6,
+                isLightOn: false,
+                autoOn: "06:30",
+                autoOff: "22:00",
+                usage: [22, 11, 12, 10, 12, 17, 22],
+            },
+            bedroom: {
+                name: "bedroom",
+                lightIntensity: 5,
+                numOfLights: 3,
+                isLightOn: false,
+                autoOn: "06:30",
+                autoOff: "22:00",
+                usage: [18, 5, 7, 5, 6, 6, 18],
+            },
+            bathroom: {
+                name: "bathroom",
+                lightIntensity: 5,
+                numOfLights: 1,
+                isLightOn: false,
+                autoOn: "06:30",
+                autoOff: "22:00",
+                usage: [2, 1, 1, 1, 1, 3, 3],
+            },
+            "outdoor lights": {
+                name: "outdoor lights",
+                lightIntensity: 5,
+                numOfLights: 6,
+                isLightOn: false,
+                autoOn: "06:30",
+                autoOff: "22:00",
+                usage: [15, 12, 13, 9, 12, 13, 18],
+            },
+            "guest room": {
+                name: "guest room",
+                lightIntensity: 5,
+                numOfLights: 4,
+                isLightOn: false,
+                autoOn: "06:30",
+                autoOff: "22:00",
+                usage: [12, 10, 3, 9, 5, 5, 18],
+            },
+            kitchen: {
+                name: "kitchen",
+                lightIntensity: 5,
+                numOfLights: 3,
+                isLightOn: false,
+                autoOn: "06:30",
+                autoOff: "22:00",
+                usage: [12, 19, 13, 11, 12, 13, 18],
+            },
+            "walkway & corridor": {
+                name: "walkway & corridor",
+                lightIntensity: 5,
+                numOfLights: 8,
+                isLightOn: false,
+                autoOn: "06:30",
+                autoOff: "22:00",
+                usage: [12, 19, 13, 15, 22, 23, 18],
+            },
         };
         this.wifiConnections = [
-            { id: 0, wifiName: 'Inet service', signal: 'excellent' },
-            { id: 1, wifiName: 'Kojo_kwame121', signal: 'poor' },
-            { id: 2, wifiName: 'spicyalice', signal: 'good' },
-            { id: 3, wifiName: 'virus', signal: 'good' },
+            { id: 0, wifiName: "Inet service", signal: "excellent" },
+            { id: 1, wifiName: "Kojo_kwame121", signal: "poor" },
+            { id: 2, wifiName: "spicyalice", signal: "good" },
+            { id: 3, wifiName: "virus", signal: "good" },
         ];
         this.isLightOn = false;
         this.lightIntensity = 5;
@@ -33,19 +83,19 @@ class General {
     getWifi() {
         return this.wifiConnections;
     }
-    getSelectedComponentName(element, ancestorIdentifier = '.rooms', elementSelector = 'p') {
+    getSelectedComponentName(element, ancestorIdentifier = ".rooms", elementSelector = "p") {
         const selectedElement = this.closestSelector(element, ancestorIdentifier, elementSelector);
         if (!selectedElement || !selectedElement.textContent)
             return null;
-        const name = selectedElement ? selectedElement?.textContent?.toLowerCase() : null;
+        const name = selectedElement
+            ? selectedElement?.textContent?.toLowerCase()
+            : null;
         return name;
     }
     getComponentData(element, ancestorIdentifier, childElement) {
         const room = this.getSelectedComponentName(element, ancestorIdentifier, childElement);
-        if (!room)
-            return null;
         const data = this.getComponent(room);
-        return data;
+        return data ?? null;
     }
     renderHTML(element, position, container) {
         container.insertAdjacentHTML(position, element);
@@ -71,7 +121,9 @@ class General {
     }
     closestSelector(selectedElement, ancestorIdentifier, childSelector) {
         const closestAncestor = selectedElement.closest(ancestorIdentifier);
-        return closestAncestor ? closestAncestor.querySelector(childSelector) : null;
+        return closestAncestor
+            ? closestAncestor.querySelector(childSelector)
+            : null;
     }
     handleLightIntensity(element, lightIntensity) {
         element.style.filter = `brightness(${lightIntensity})`;
@@ -81,40 +133,42 @@ class General {
         this.componentsData[data.name] = data;
     }
     updateMarkupValue(element, value) {
-        element.textContent = value;
+        element.textContent = String(value);
     }
     toggleHidden(element) {
-        element.classList.toggle('hidden');
+        element.classList.toggle("hidden");
     }
     removeHidden(element) {
-        element.classList.remove('hidden');
+        element.classList.remove("hidden");
     }
     addHidden(element) {
-        element.classList.add('hidden');
+        element.classList.add("hidden");
     }
     setComponentElement(roomData) {
         let parent;
-        if (roomData.name === 'walkway & corridor') {
-            parent = this.selector('.corridor');
+        if (roomData.name === "walkway & corridor") {
+            parent = this.selector(".corridor");
         }
-        else if (roomData.name === 'guest room') {
+        else if (roomData.name === "guest room") {
             const elementClassName = this.formatTextToClassName(roomData.name);
             parent = this.selector(`.${elementClassName}`);
         }
-        else if (roomData.name === 'outdoor lights') {
-            parent = this.selector('.outside_lights');
+        else if (roomData.name === "outdoor lights") {
+            parent = this.selector(".outside_lights");
         }
         else {
             parent = this.selector(`.${roomData.name}`);
         }
-        const buttonElement = parent ? parent.querySelector('.light-switch') : null;
-        if (roomData['element'])
+        const buttonElement = parent ? parent.querySelector(".light-switch") : null;
+        if (roomData["element"])
             return;
-        roomData['element'] = buttonElement;
+        if (buttonElement instanceof HTMLElement) {
+            roomData["element"] = buttonElement;
+        }
     }
     formatTextToClassName(name) {
-        const words = name.split(' ');
-        const newWord = words.join('_');
+        const words = name.split(" ");
+        const newWord = words.join("_");
         return newWord;
     }
 }

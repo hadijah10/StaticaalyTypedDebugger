@@ -8,8 +8,8 @@ const nav = document.querySelector('nav') as HTMLElement;
 const loader = document.querySelector('.loader-container') as HTMLElement;
 
 // imports
-import Light from './basicSettings';
-import AdvanceSettings from './advancedSettings';
+import Light from './basicSettings.js';
+import AdvanceSettings from './advancedSettings.js';
 
 // object creation
 const lightController = new Light();
@@ -69,6 +69,7 @@ mainRoomsContainer?.addEventListener('change', (e:Event):void => {
 
 // advance settings modal
 advanceFeaturesContainer?.addEventListener('click', (e) => {
+    console.log(e.target)
     const selectedElement = e.target as HTMLElement;
 
     if (selectedElement.closest('.close-btn')) {

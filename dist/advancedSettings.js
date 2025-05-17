@@ -50,20 +50,24 @@ class AdvanceSettings extends Light {
         }
     }
     customizeAutomaticOnPreset(selectedElement) {
-        const element = this.closestSelector(selectedElement, '.defaultOn-Okay', 'input');
+        console.log("i was clicked");
+        const element = this.closestSelector(selectedElement, '.defaultOn', 'input');
         if (!element)
             return;
         const { value } = element;
+        console.log(value);
         // when value is falsy
         if (!value)
             return;
         const component = this.getComponentData(element, '.advanced_features', '.component_name');
+        console.log(component);
         if (!component)
             return;
         component.autoOn = value;
         element.value = '';
         // selecting display or markup view
         const spanElement = this.selector('.auto_on > span:last-child');
+        console.log(spanElement);
         this.updateMarkupValue(spanElement, component.autoOn);
         // update room data with element
         this.setComponentElement(component);
@@ -92,8 +96,10 @@ class AdvanceSettings extends Light {
         this.automateLight(component['autoOff'], component);
     }
     getSelectedComponent(componentName) {
-        if (!componentName)
-            return this.componentsData;
+        if (!componentName) {
+            const firstKey = Object.keys(this.componentsData)[0];
+            return firstKey ? this.componentsData[firstKey] : null;
+        }
         const component = this.componentsData[componentName.toLowerCase()];
         return component;
     }
